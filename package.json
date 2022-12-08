@@ -1,0 +1,15 @@
+{
+  "name": "fsdb.js",
+  "version": "3.0.0",
+  "repository": {
+    "url": "https://github.com/lucasFelixSilveira/fsdb.js"
+  },
+  "author": {
+    "name": "Lucas Felix Silveira",
+    "email": "lucasdwbfff@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
