@@ -10,7 +10,7 @@
 # 🟣 Instalação
 - Abara o seu Visual Studio code ou outra IDE, abra o terminal e use:
 ```sh-session
-npm i fsdb.js
+> npm i fsdb.js
 ```
 **Perfeito!** Agora Você já pode usar a _**Fsdb**_!
 

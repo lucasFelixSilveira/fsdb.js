@@ -23,8 +23,10 @@ const updateProps = () => { return { db: db, logged: logged, updated: hasUpdate,
 const setColdown = (x) => coldown = x;
 const getColdown = () => coldown;
 const getFile = (fileName) => require(`./database/${fileName}.js`); 
+const getCdnFile = (fileName) => require(`./cdn/${fileName}.js`); 
 const setWaringVersion = () => versionAlerted = true;
 const moldarMs = (ms) => require('./utils/ms.js')(0, ms)
+const verifyVersion = () => require('./utils/version.js')(require('./package.json').version, versionAlerted, setWaringVersion)
 
 // especial functions²
 function functions() {
@@ -48,6 +50,8 @@ function loopingProps(x) {
 //imports
 const fetch = require('node-fetch');
 const console_ = require('./utils/console.js')
+const fs = require('fs');
+const { type } = require('os');
 
 //module
 module.exports = {
@@ -101,26 +105,46 @@ module.exports = {
     database: function() {
         return {
             get: (directory) => {
-                // verifyVersion()
+                verifyVersion()
                 return getFile('get')(directory, this.props, functions());
             },
             block: (directory) => {
                 return {
                     set: (object) => {
-                        // verifyVersion()
+                        verifyVersion()
                         const att = () => {
                             this.resetProps();
                         }
                         return getFile('set')(directory, object, this.props, functions(), att);
                     },
                     delete: () => {
-                        // verifyVersion()
+                        verifyVersion()
                         const att = () => {
                             this.resetProps();
                         }
                         return getFile('delete')(directory, this.props, functions(), att);
                     }
                 }
+            }
+        }
+    },
+    cdn: function (folder, typeUrl) {
+        return {
+            upload: (directory) => {
+                let fileFormat = directory.split('.').pop();
+                return getCdnFile('upload')({directory, fileFormat2: fileFormat}, this.props, functions())
+            },
+            download: (element) => {
+                if(! typeUrl || typeUrl == false ) {
+                    if( ! element.hash || ! element.format ) return console_.error('This object is not from an Fsdb img.')
+                    return getCdnFile('download')(element, folder, false, this.props, functions())
+                } else {
+                    return getCdnFile('download')(element, folder, true, this.props, functions())
+                }
+            },
+            validate: (element) => {
+                if( ! element.hash || ! element.format ) return console_.error('This object is not from an Fsdb img.')
+                return getCdnFile('validate')(element, folder, this.props, functions())
             }
         }
     },
