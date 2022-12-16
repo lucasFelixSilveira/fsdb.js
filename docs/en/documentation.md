@@ -2,7 +2,7 @@
     <img src="https://media.discordapp.net/attachments/1045802171146453124/1047137968042823800/Design_sem_nome__9_-removebg-preview.png?width=694&height=230" width="320">
     <br>
     Uma database simples e completa!
-    <h1>V. 3.0.0 [Beta]</h1>
+    <h1>V. 3.1.1 [Beta]</h1>
 </div>
 
 > Clique [aqui](https://github.com/lucasFelixSilveira/fsdb.js) to see the documentation in English
@@ -84,10 +84,130 @@ const db = fsdb.database(); // Get database commands
 
 db.block('directory').delete(); // This will delete the saved data in the directory.
 ```
+# 🍕 Cdn
+- **Top information:**
+- - Our **CDN** was simple and intuitive, but there are things you need to understand...
+- - `1`. Our **CDN** doesn't need login! You can use it even without being logged into an Fsdb database.
+- - `2`. Elements are...? Elements are upadas images, they send an "Object" that can be collected using 'await' or '.then'.
+- - `3`. Okay, but what's validation for? Validation is so that images don't weigh on our system, they are temporarily deleted from a **local** folder from hosting.
+
+<br>
+
+- **Now that you know the main concepts, let's go upstairs!**
+
+<br>
+
+> Mode of use
+- We should just as in the examples above (of database) we must first collect the first return parameter.
+```js
+const cdn = fsdb.cdn; // Don't pass it as a function!
+```
+- **(DON'T PASS IT AS FUNCTION!)** 
+- After collecting, you are already fit for use.
+- **Upload**
+- - Use this to upar the image to the cloud.
+```js
+(async() => { // await method
+    
+    const element = await cdn().upload(__dirname + `/images/img.jpg`)
+    // ...
+
+})()
+
+// .then method
+    cdn().upload(__dirname + `/images/img.jpg`).then(element => {
+        // ...
+    })
+```
+- **Download**
+- - Use this to download an image of the phone to your "local server"
+```js
+(async() => { // await method
+
+    // download by "element"
+        await cdn(__dirname + `/downloads`).download(element)
+        // ....
+
+    // download by url
+        const url = `https://fsdb.tk/ups/hash.jpg`
+        await cdn(__dirname + `/downloads`, true).download(url)
+        // ...
+
+})()
+
+// .then method
+
+ // download by "element"
+    cdn(__dirname + `/downloads`).download(element).then(() => {
+        // ...
+    })
+
+// download by url
+    const url = `https://fsdb.tk/ups/hash.jpg`
+    cdn(__dirname + `/downloads`, true).download(url).then(() => {
+        // ...
+    })
+
+```
+- **Validate**
+- - Use this to validate an image in which the link no longer works
+- - - **( Remember that the image can only be validated again if it was sent in less than 10 minutes )**
+- - - Inside we also have as "subcommand" the "getURL" that get the url of the element informed and returns directly to you.
+```js
+(async () => { // await method
+
+    const valid = await cdn().validate(element)
+    const validUrl = valid.getURL();
+    // ... 
+
+})()
+
+// .then method
+    cdn().validate(element).then(valid => {
+        const validUrl = valid.getURL();
+        // ...
+    })
+```
+
+<div align="center">
+    <h3>
+        Resolution of some problems.
+    </h3>
+</div>
+
+- You don't know how to `__dirname`
+- - Problems with returning a directory? Try this:
+```js
+function getDir(dir) {
+    return new Promise((resolve, reject) => {
+        const array = dir.split('\\')
+        const no = array.length - 1
+        let str = '';
+        array.forEach((item, index) => {
+            console.log(str)
+            if( index !== no ) str = str +'\\'+ item
+            if( index == no ) {
+                const str_ = str.replace('\\', '');
+                resolve(str_)
+            }
+        })
+    })
+}
+
+getDir(__dirname).then(x => console.log(x))
+```
+- - Problems using 🐧 linux?
+```
+In that case just do not use.
+Remember that the fsdb "upload" file is within:
+    /node_modules/fsdb.js/cdn
+
+and use this as "relativity" for your directory with "./"
+```
 
 # 🔗 Links
-- **[Repositório](https://github.com/lucasFelixSilveira/fsdb.js)**
-- **[Módulo](https://www.npmjs.com/package/fsdb.js)**
+- **[Repository](https://github.com/lucasFelixSilveira/fsdb.js)**
+- **[Module](https://www.npmjs.com/package/fsdb.js)**
 
 # ⚙ Creation reasons
 
@@ -96,5 +216,7 @@ db.block('directory').delete(); // This will delete the saved data in the direct
 </div>
 
 # 📋 Release notes
+- **3.1.0** & **3.1.1** 
+- - ` Cdn! `
 - **3.0.0** 
 - - ` Launch! `

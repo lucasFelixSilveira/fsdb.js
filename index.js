@@ -51,7 +51,6 @@ function loopingProps(x) {
 const fetch = require('node-fetch');
 const console_ = require('./utils/console.js')
 const fs = require('fs');
-const { type } = require('os');
 
 //module
 module.exports = {
