@@ -27,6 +27,7 @@ const getCdnFile = (fileName) => require(`./cdn/${fileName}.js`);
 const setWaringVersion = () => versionAlerted = true;
 const moldarMs = (ms) => require('./utils/ms.js')(0, ms)
 const verifyVersion = () => require('./utils/version.js')(require('./package.json').version, versionAlerted, setWaringVersion)
+const verifyHasBank = () => require('./utils/create/verify.js')();
 
 // especial functions²
 function functions() {
@@ -56,8 +57,8 @@ const fs = require('fs');
 module.exports = {
     props: props_,
     connect: function(infos) {
-        verifyHasBank()
         return new Promise((resolve, reject) => {
+            verifyHasBank()
             const oldDate = new Date();
             if( this.props.logged == true ) this.resetProps()
             if(! infos ) return console_.error('Enter the login information.')
