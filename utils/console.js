@@ -34,10 +34,15 @@ function shellCommand(msg) {
   log("\033[0;34m$ "+msg+"\033[0m")
 }
 
+function message(msg) {
+  log("\033[0;35m# Fsdb: \033[0m"+msg)
+}
+
 
 module.exports.log = log;
 module.exports.error = error;
 module.exports.ok = ok;
 module.exports.warn = warn;
 module.exports.debug = debug;
+module.exports.message = message;
 module.exports.shellCommand = shellCommand;

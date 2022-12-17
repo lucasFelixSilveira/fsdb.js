@@ -104,20 +104,23 @@ module.exports = {
     database: function() {
         return {
             get: (directory) => {
+                verifyHasBank()
                 verifyVersion()
                 return getFile('get')(directory, this.props, functions());
             },
             block: (directory) => {
                 return {
                     set: (object) => {
-                        verifyVersion()
+                    verifyHasBank()
+                    verifyVersion()
                         const att = () => {
                             this.resetProps();
                         }
                         return getFile('set')(directory, object, this.props, functions(), att);
                     },
                     delete: () => {
-                        verifyVersion()
+                    verifyHasBank()
+                    verifyVersion()
                         const att = () => {
                             this.resetProps();
                         }
@@ -130,10 +133,12 @@ module.exports = {
     cdn: function (folder, typeUrl) {
         return {
             upload: (directory) => {
+                verifyVersion()
                 let fileFormat = directory.split('.').pop();
                 return getCdnFile('upload')({directory, fileFormat2: fileFormat}, this.props, functions())
             },
             download: (element) => {
+                verifyVersion()
                 if(! typeUrl || typeUrl == false ) {
                     if( ! element.hash || ! element.format ) return console_.error('This object is not from an Fsdb img.')
                     return getCdnFile('download')(element, folder, false, this.props, functions())
@@ -142,6 +147,7 @@ module.exports = {
                 }
             },
             validate: (element) => {
+                verifyVersion()
                 if( ! element.hash || ! element.format ) return console_.error('This object is not from an Fsdb img.')
                 return getCdnFile('validate')(element, folder, this.props, functions())
             }

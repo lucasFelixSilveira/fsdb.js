@@ -2,7 +2,7 @@
     <img src="https://media.discordapp.net/attachments/1045802171146453124/1047137968042823800/Design_sem_nome__9_-removebg-preview.png?width=694&height=230" width="320">
     <br>
     Uma database simples e completa!
-    <h1>V. 3.1.1 [Beta]</h1>
+    <h1>V. 3.2.0 [Beta]</h1>
 </div>
 
 > Click [here](https://github.com/lucasFelixSilveira/fsdb.js/blob/main/docs/en/documentation.md) to see the documentation in English
@@ -10,7 +10,7 @@
 # 🟣 Instalação
 - Abara o seu Visual Studio code ou outra IDE, abra o terminal e use:
 ```sh-session
-> npm i fsdb.js
+npm i fsdb.js
 ```
 **Perfeito!** Agora Você já pode usar a _**Fsdb**_!
 
@@ -18,8 +18,11 @@
 
 - Primeiro, você tem que conhecer os principios de login da fsdb.
 - - Como criar meu banco de dados?
-- - - Clique **[aqui](https://github.com/lucasFelixSilveira/fsdb.js/raw/main/services/files.zip)** para baixar os arquivos.
-- - - Clique **[aqui](https://github.com/lucasFelixSilveira/fsdb.js/blob/main/docs/pt/createBanks.md)** para ver como criar um banco de dados.
+- - - Instale o módulo npm em sem projeto e use qualquer "comando", automaticamente será criado um script na sua `package.json` chamado "fsdb" e também um .js na raiz do seu projeto. Apenas use:
+```sh-session 
+npm run fsdb
+```
+- - - Para executar o criador e poder configurar seu novo banco de dados.
 
 - - Após criar, faça o login no banco de dados usando o seguinte comando:
 ```js
