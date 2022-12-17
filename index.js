@@ -56,6 +56,7 @@ const fs = require('fs');
 module.exports = {
     props: props_,
     connect: function(infos) {
+        verifyHasBank()
         return new Promise((resolve, reject) => {
             const oldDate = new Date();
             if( this.props.logged == true ) this.resetProps()
@@ -111,16 +112,16 @@ module.exports = {
             block: (directory) => {
                 return {
                     set: (object) => {
-                    verifyHasBank()
-                    verifyVersion()
+                        verifyHasBank()
+                        verifyVersion()
                         const att = () => {
                             this.resetProps();
                         }
                         return getFile('set')(directory, object, this.props, functions(), att);
                     },
                     delete: () => {
-                    verifyHasBank()
-                    verifyVersion()
+                        verifyHasBank()
+                        verifyVersion()
                         const att = () => {
                             this.resetProps();
                         }
