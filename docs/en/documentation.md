@@ -2,13 +2,13 @@
     <img src="https://media.discordapp.net/attachments/1045802171146453124/1047137968042823800/Design_sem_nome__9_-removebg-preview.png?width=694&height=230" width="320">
     <br>
     Uma database simples e completa!
-    <h1>V. 3.2.2 [Beta]</h1>
+    <h1>V. 3.3.0 [Beta]</h1>
 </div>
 
-> Clique [aqui](https://github.com/lucasFelixSilveira/fsdb.js) to see the documentation in English
+> Clique [aqui](https://github.com/lucasFelixSilveira/fsdb.js) para ver a documentação em Português
 
 # 🟣 Installation
-- Abara your Visual Studio code or other IDE, open the terminal and use:
+- Open your Visual Studio code or other IDE, open the terminal and use:
 ```sh-session
 npm i fsdb.js
 ```
@@ -18,11 +18,12 @@ npm i fsdb.js
 
 - First, you have to know the login principles of fsdb.
 - - How do I create my database?
-- - - Install the npm module in no project and use any "command", an automatically created script in your 'package.json' called "fsdb" and also a .js at the root of your project. Just use:
-```sh-session 
-npm run fsdb
-```
-- - - To run the creator and be able to configure your new database.
+There are 2 ways to create databases currently, the _**[CLI](https://www.npmjs.com/package/fsdb-cli)**_ and fsdb standard.
+- Nossa recomendação é a **CLI**
+
+If you do not have the CLI installed, from the moment you use any fsdb command, a script will be created in your `package.json` and a file called `fsdb.js` at the root of your project. The Script can be run with `npm run fsdb` and it will have the same function as the CLI. _**( You can delete him whenever you want, he will not return.) **_
+
+If you have the CLI installed **( Globally)** just use in your terminal `fsdb-cli` and create your bank!
 
 - - After creating, log in to the database using the following command:
 ```js
@@ -219,7 +220,11 @@ and use this as "relativity" for your directory with "./"
 </div>
 
 # 📋 Release notes
+- **3.3.0** 
+- - ` CLI `
+
 - **3.1.0** & **3.1.1** 
 - - ` Cdn! `
+
 - **3.0.0** 
 - - ` Launch! `
