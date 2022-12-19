@@ -161,15 +161,16 @@ const cdn = fsdb.cdn; // Don't pass it as a function!
 (async () => { // await method
 
     const valid = await cdn().validate(element)
-    const validUrl = valid.getURL();
+    const validUrl = await valid.getURL();
     // ... 
 
 })()
 
 // .then method
     cdn().validate(element).then(valid => {
-        const validUrl = valid.getURL();
-        // ...
+        valid.getURL().then(validUrl => {
+            // ...
+        })
     })
 ```
 
