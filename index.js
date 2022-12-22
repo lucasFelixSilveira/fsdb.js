@@ -5,21 +5,23 @@ let hasUpdate = false;
 let dbInfos = {};
 let coldown = false;
 let versionAlerted = false;
+let configured = false;
+let FIreray = {}
 
 let props_ = {
     db: db,
     logged: logged,
-    updated: hasUpdate,
     infos: dbInfos,
+    updated: hasUpdate,
 }
 
 // especial functions
 const isLogged = () => logged = true;
 const getUp = (_db) => { db = _db.db; };
-const deploy = (x) => hasUpdate = x;
 const getDeploy = () => hasUpdate;
 const getProps = () => require('./').getProps(true);
 const updateProps = () => { return { db: db, logged: logged, updated: hasUpdate, infos: dbInfos }; }
+const setProps = (x) => require('./').props = x;
 const setColdown = (x) => coldown = x;
 const getColdown = () => coldown;
 const getFile = (fileName) => require(`./database/${fileName}.js`); 
@@ -28,8 +30,15 @@ const setWaringVersion = () => versionAlerted = true;
 const moldarMs = (ms) => require('./utils/ms.js')(0, ms)
 const verifyVersion = () => require('./utils/version.js')(require('./package.json').version, versionAlerted, setWaringVersion)
 const verifyHasBank = () => require('./utils/create/verify.js')();
+const getUpdated = () => hasUpdate;
 
 // especial functions²
+function deploy(x) {
+    hasUpdate = x;
+    props_ = updateProps();
+    setProps(props_);
+}
+
 function functions() {
     return {
         setDeploy: deploy,
@@ -38,7 +47,8 @@ function functions() {
         getDeploy: getDeploy,
         garantirProps: () => { props_ = updateProps(); require('./').resetProps(); setColdown(false); return getProps() },
         setColdown: setColdown,
-        getColdown: getColdown
+        getColdown: getColdown,
+        getUpdated: getUpdated
     }
 }
 
@@ -108,7 +118,7 @@ module.exports = {
             get: (directory) => {
                 verifyHasBank()
                 verifyVersion()
-                return getFile('get')(directory, this.props, functions());
+                return getFile('get')(directory, this.props, functions())
             },
             block: (directory) => {
                 return {
@@ -152,6 +162,31 @@ module.exports = {
                 verifyVersion()
                 if( ! element.hash || ! element.format ) return console_.error('This object is not from an Fsdb img.')
                 return getCdnFile('validate')(element, folder, this.props, functions())
+            }
+        }
+    },
+    FIreray: function () {
+        return {
+            configure: (config) => {
+                return new Promise(resolve => {
+                    if( configured == true ) return console_.error('You have already set up FIreray in this project.')
+                    configured = true;
+                    FIreray.config = config;
+                    resolve(200)
+                })
+            },
+            use: (x, y) => {
+                if( configured == false ) return console_.error('You have not yet configured FIreray on this project.')
+                const config = FIreray.config;
+                if(! config[x] ) return console_.error('The configuration of the FIreray "'+x+'" was not found.')
+                let stringParams = '';
+                return new Promise((resolve, reject) => {
+                    y.forEach((item, index) => {
+                        if( index == 0 ) stringParams = stringParams + 'y['+index+']'
+                        if( index >= 1 ) stringParams = stringParams + ', y['+index+']'
+                        if( index >= ( y.length - 1 ) ) return resolve(eval(`config[x](${stringParams})`))
+                    })
+                })
             }
         }
     },

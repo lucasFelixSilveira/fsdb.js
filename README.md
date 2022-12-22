@@ -2,7 +2,7 @@
     <img src="https://media.discordapp.net/attachments/1045802171146453124/1047137968042823800/Design_sem_nome__9_-removebg-preview.png?width=694&height=230" width="320">
     <br>
     Uma database simples e completa!
-    <h1>V. 3.3.1 [Beta]</h1>
+    <h1>V. 3.4.0 [Beta]</h1>
 </div>
 
 > Click [here](https://github.com/lucasFelixSilveira/fsdb.js/blob/main/docs/en/documentation.md) to see the documentation in English
@@ -212,6 +212,101 @@ Lembre-se que o arquivo de "upload" da fsdb está dentro de:
 e use isso como "relatividade" para seu diretório com "./"
 ```
 
+# 🧶 FIreray
+- Para o uso da FIreray a fsdb assim como a Firebase ( realtime ) não tem o uso de arrays, ent, disponibilizamos uma versão da FIreray q contem a fsdb já dentro.
+- Para instalar, use:
+```sh-session
+npm i fireray
+```
+
+<h3> Modo de uso </h3>
+
+> Modo de uso pela fsdb
+- **Configure**
+- - Após a instalação da fsdb e a FIreray é preciso que vocês configurem as instâncias da FIreray.
+```js
+const fsdb = require('fsdb.js');
+const FIreray = {
+    md: require('fireray'),
+    fs: fsdb.FIreray()
+}
+
+await FIreray.configure(
+    {
+        get: FIreray.md.fsGet,
+        set: FIreray.md.fsSet,
+        delete: FIreray.md.fsDelete,
+        remove: FIreray.md.fsRemove,
+        replace: FIreray.md.fsReplace,
+        push: FIreray.md.fsPush,
+        clone: FIreray.md.fsClone,
+    }
+)
+
+``` 
+- - Você pode até renomear, trocando o nome do parâmetro do object para o que for.
+
+- **Use**
+- - No use, vc deve passar no primeiro parâmetro o nome q você configurou para podermos usar.
+- - No segundo parâmetro você deve passar um array contento todos os parâmetros que você passaria normalmente para a FIreray.
+> Sintaxe: db, 'diretório', complemento
+```js
+const fsdb = require('fsdb.js');
+
+fsdb.connect().then(async () => {
+    
+    const db = fsdb.database();
+    const FIreray = fsdb.FIreray();
+
+    await FIreray.configure();
+
+    const users = await FIreray.use('get', [db, 'users'])
+    console.log(users)
+
+})
+```
+
+> Uso pela FIreray
+
+<h3> 1: </h3>
+
+- **Single use**
+- - O **Sigle use** é um comando da FIreray que define o uso único da Firebase ou da Fsdb.
+```js
+const FIreray = require('fireray');
+
+FIreray.singleUse('fsdb');
+```
+
+- **Use**
+- - O **Use** assim como dos exemplos acima pede uma string com o nome do "comando" que deseja usar, porém limitado a não ter modificações no nome.
+```js
+const FIreray = require('fireray');
+
+FIreray.singleUse('fsdb');
+FIreray.use('get', (cmd) => {
+    // cmd é o retorno já com a função respectiva.
+    cmd()
+})
+``` 
+
+<h3> 2: </h3>
+
+- O modo de uso antigo da FIreray ainda está por ai, porém um pouco mais cheio. Agora antes é preciso informar ou `fs` ou `fb` de acordo com a database que vai usar.
+```js
+const FIreray = require('fireray');
+const fsdb = requir('fsdb.js');
+
+await fsdb.connect().then(async () => {
+
+    const db = fsdb.database()
+
+    const get = await FIreray.fsGet(db, 'diretório')
+    console.log(get)
+
+})
+```
+
 # 🔗 Links
 - **[Repositório](https://github.com/lucasFelixSilveira/fsdb.js)**
 - **[Módulo](https://www.npmjs.com/package/fsdb.js)**
@@ -223,6 +318,9 @@ e use isso como "relatividade" para seu diretório com "./"
 </div>
 
 # 📋 Notas da versão
+- **3.4.0** 
+- - ` FIreray `
+
 - **3.3.0** 
 - - ` CLI `
 
