@@ -10,9 +10,24 @@ module.exports = () => {
     scripts.fsdb = `node fsdb.js`
     package.scripts = scripts;
     let newSave = saves;
-    newSave.createdBanks = true;
+    function backDir(dir) {
+        return new Promise((resolve, reject) => {
+            const array = dir.split('\\')
+            const no = array.length - 1
+            let str = '';
+            array.forEach((item, index) => {
+                console.log(str)
+                if( index !== no ) str = str +'\\'+ item
+                if( index == no ) {
+                    const str_ = str.replace('\\', '');
+                    resolve(str_)
+                }
+            })
+        })
+    }
     fs.readFile(userAndReference + '/AppData/Roaming/npm/node_modules/fsdb-cli/src/cli.js', (err, data) => {
         if( err ) {
+            newSave.createdBanks = true;
             fs.writeFile(__dirname.split('node_modules')[0] + 'node_modules/fsdb.js/utils/saves.json', JSON.stringify(newSave), null, (err) => {
                 if( err ) console.log(err)
             })
@@ -26,6 +41,37 @@ module.exports = () => {
                 })
             })
             retornar()
+        } else {
+            fs.readFile(userAndReference + '/AppData/Roaming/npm/node_modules/fsdb-cli/config/save.json', async (err, data) => {
+                if(! err ) {
+                    const dir = await backDir(__dirname);
+                    fs.writeFile(dir + '/configs.json', data, null, (err) => {
+                        if( err ) return console.log(err)
+                        if(! saves.createdConfig ) {
+                            newSave.createdConfig = true
+                            fs.writeFile(dir + '/saves.json', JSON.stringify(newSave), null, (err) => {
+                                if( err ) console.log(err)
+                            })
+                            console_.message('Settings file successfully created.')
+                        }
+                    })
+                } else {
+                    const defaultObject = {
+                        updateAlert: false
+                    }
+                    const dir = await backDir(__dirname);
+                    fs.writeFile(dir + '/configs.json', JSON.stringify(defaultObject), null, (err) => {
+                        if( err ) return console.log(err)
+                        if(! saves.createdConfig ) {
+                            newSave.createdConfig = true
+                            fs.writeFile(dir + '/saves.json', JSON.stringify(newSave), null, (err) => {
+                                if( err ) console.log(err)
+                            })
+                            console_.message('Settings file successfully created.')
+                        }
+                    })
+                }
+            })
         }
     })
 }
