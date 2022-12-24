@@ -2,7 +2,7 @@
     <img src="https://media.discordapp.net/attachments/1045802171146453124/1047137968042823800/Design_sem_nome__9_-removebg-preview.png?width=694&height=230" width="320">
     <br>
     Uma database simples e completa!
-    <h1>V. 3.4.2 [Beta]</h1>
+    <h1>V. 3.4.4 [Beta]</h1>
 </div>
 
 > Clique [aqui](https://github.com/lucasFelixSilveira/fsdb.js) para ver a documentação em Português
