@@ -16,7 +16,6 @@ module.exports = () => {
             const no = array.length - 1
             let str = '';
             array.forEach((item, index) => {
-                console.log(str)
                 if( index !== no ) str = str +'\\'+ item
                 if( index == no ) {
                     const str_ = str.replace('\\', '');
@@ -42,7 +41,7 @@ module.exports = () => {
             })
             retornar()
         } else {
-            fs.readFile(userAndReference + '/AppData/Roaming/npm/node_modules/fsdb-cli/config/save.json', async (err, data) => {
+            fs.readFile(userAndReference + '/AppData/Roaming/npm/node_modules/fsdb-cli/configsSave.json', async (err, data) => {
                 if(! err ) {
                     const dir = await backDir(__dirname);
                     fs.writeFile(dir + '/configs.json', data, null, (err) => {
@@ -57,7 +56,7 @@ module.exports = () => {
                     })
                 } else {
                     const defaultObject = {
-                        updateAlert: false
+                        updateAlert: "active"
                     }
                     const dir = await backDir(__dirname);
                     fs.writeFile(dir + '/configs.json', JSON.stringify(defaultObject), null, (err) => {

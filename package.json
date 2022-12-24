@@ -1,6 +1,6 @@
 {
   "name": "fsdb.js",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "repository": {
     "url": "https://github.com/lucasFelixSilveira/fsdb.js"
   },
@@ -13,6 +13,7 @@
     "axios": "^1.2.1",
     "node-fetch": "^2.6.7",
     "prompt-sync": "^4.2.0",
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "fs-extra": "^11.1.0"
   }
 }
