@@ -6,18 +6,18 @@ module.exports = (version, var_, _func) => {
         if(! config.updateAlert ) ex();
         else {
             if( config.updateAlert == "active" ) ex();
-            else if( updateAlert == "disable" ) return;
+            else if( config.updateAlert == "disable" ) return;
             else ex();
         }
     } catch (er) {
         ex();
     }
     function ex() {
+        if( var_ == true ) return;
         fetch(`https://lucasfelixsilveira.github.io/fsdb.js/`, { method: 'GET' })
             .then(res => res.json())
             .then(res => {
                 if( res.version === version ) return; 
-                if( var_ == true ) return;
                 console_.warn("You're using an old version! Update using:")
                 setTimeout(() => {
                     console_.shellCommand("npm i fsdb.js")
