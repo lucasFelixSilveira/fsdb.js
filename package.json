@@ -1,19 +1,27 @@
 {
-  "name": "fsdb.js",
-  "version": "3.4.4",
+  "version": "4.0.1",
+  "scripts": {
+    "test": "node ../testes/fsdb.js"
+  },
+  "description": "The best database and cdn!",
   "repository": {
     "url": "https://github.com/lucasFelixSilveira/fsdb.js"
   },
-  "author": {
-    "name": "Lucas Felix Silveira",
-    "email": "lucasdwbfff@gmail.com"
-  },
+  "homepage": "https://lucasfs.tk/docs/fsdb",
   "license": "Apache-2.0",
+  "author": "Lucas Felix Silverira <lucasdwbfff@gmail.com>",
+  "keywords": [
+    "database",
+    "cdn",
+    "simple",
+    "easy",
+    "oneDev",
+    "data",
+    "images",
+    "img"
+  ],
   "dependencies": {
-    "axios": "^1.2.1",
-    "node-fetch": "^2.6.7",
-    "prompt-sync": "^4.2.0",
-    "readline-sync": "^1.4.10",
-    "fs-extra": "^11.1.0"
+    "ansi-256-colors": "^1.1.0",
+    "node-fetch": "^2.6.7"
   }
 }
