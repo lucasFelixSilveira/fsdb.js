@@ -1,4 +1,5 @@
 {
+  "name": "fsdb.js",
   "version": "4.0.1",
   "scripts": {
     "test": "node ../testes/fsdb.js"
