@@ -8,7 +8,7 @@
 <p align="center">
     <a href="https://www.npmjs.com/package/fsdb.js"><img src="https://img.shields.io/npm/v/fsdb.js.svg?maxAge=3600" alt="npm version" /></a>
     <a href="https://www.npmjs.com/package/fsdb.js"><img src="https://img.shields.io/npm/dt/fsdb.js.svg?maxAge=3600" alt="npm downloads" /></a>
-    <img alt="visitants" src="https://visitor-badge.glitch.me/badge?page_id=lucasFelixSilveira-fsdbjs.visitor-badge" />
+    <img alt="visitants" src="https://visitor-badge.glitch.me/badge?page_id=lucasFelixSilveira-fsdbjs.visitor-badge" >
     <img alt="license" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" href="https://img.shields.io/badge/License-Apache_2.0-blue.svg">
 </p>
 
